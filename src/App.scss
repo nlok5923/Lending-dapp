@@ -1,0 +1,110 @@
+html {
+    height:100%;
+  }
+  
+  body {
+    margin:0;
+  }
+  
+  .bg {
+    animation:slide 3s ease-in-out infinite alternate;
+    background-image: linear-gradient(-60deg, rgb(111, 3, 138) 50%, rgb(57, 59, 60) 50%);
+    bottom:0;
+    left:-50%;
+    opacity:.5;
+    position:fixed;
+    right:-50%;
+    top:0;
+    z-index:-1;
+  }
+  
+  .bg2 {
+    animation-direction:alternate-reverse;
+    animation-duration:4s;
+  }
+  
+  .bg3 {
+    animation-duration:5s;
+  }
+  
+  .content {
+    background-color:rgba(111, 106, 106, 0.8);
+    border-radius:.25em;
+    box-shadow:0 0 .25em rgba(0,0,0,.25);
+    box-sizing:border-box;
+    left:50%;
+    width: 400px;
+    padding:5vmin;
+    position:fixed;
+    text-align:center;
+    top:35%;
+    transform:translate(-50%, -50%);
+    color: white;
+  }
+
+  .withDraw {
+    background-color:rgba(111, 106, 106, 0.8);
+    border-radius:.25em;
+    box-shadow:0 0 .25em rgba(0,0,0,.25);
+    box-sizing:border-box;
+    left:50%;
+    width: 400px;
+    padding:5vmin;
+    position:fixed;
+    text-align:center;
+    top:65%;
+    transform:translate(-50%, -50%);
+    color: white;
+  }
+
+  .mail {
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid black;
+      height: 30px;
+      width: 250px;
+      font-size: 25px;
+      font-family: monospace;
+  }
+
+  .btn {
+      padding: 4px 6px;
+      background-color: rgb(112, 14, 173);
+      font-family: monospace;
+      border-radius: 20px;
+      border: none;
+      color: white;
+      font-size: 1.4em;
+      margin-top: 3%;
+      width: 170px;
+    }
+
+  .balance {
+    background-color: rgb(95, 6, 140);
+    color: white;
+    border-radius: 10px;
+    margin-left: 2vh;
+    text-align: center;
+    margin-top: 1%;
+    font-size: 20px;
+  }
+
+  .heading {
+    color: white;
+    margin-top: -20px;
+  }
+
+  h1 {
+    font-size: 20px;
+    width: 30vh;
+    font-family:monospace;
+  }
+  
+  @keyframes slide {
+    0% {
+      transform:translateX(-25%);
+    }
+    100% {
+      transform:translateX(25%);
+    }
+  }
