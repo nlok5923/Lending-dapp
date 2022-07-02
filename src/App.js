@@ -130,7 +130,7 @@ const App = () => {
       <div className="withDraw">
         <input type="number" name="ethAmount" className="mail" required placeholder="Enter tokens" onChange={e => setTokenToWithdraw(e.target.value)} /> <br />
         <button className="btn" onClick={() => withDrawEth()} > Widthdraw </button>
-        <p>PS: Withdraw only intege no of stable coins currently and only use Goerli 😅</p>
+        <p>PS: Withdraw only integer no of stable coins currently and only use Goerli 😅</p>
       </div>
       <div className="loader">
       {isLoad && <Rings color="rgb(230, 182, 230)" height={80} width={80} />}
