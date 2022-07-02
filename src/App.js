@@ -88,6 +88,11 @@ const App = () => {
   const withDrawEth = async () => {
 
     try {
+
+      if(tokenToWithdraw > token) { 
+        toast.error("You don't have enough tokens");
+        return;
+      }
       let ethValue = tokenToWithdraw / ethToUsd;
       console.log(ethValue);
       let value = ethers.utils.parseEther(ethValue.toFixed(5).toString());

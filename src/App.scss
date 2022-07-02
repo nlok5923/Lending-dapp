@@ -79,6 +79,22 @@ html {
       width: 170px;
     }
 
+    .btn:hover {
+      background-color: white;
+      color: rgb(112, 14, 173);
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+
+
   .balance {
     background-color: rgb(95, 6, 140);
     color: white;
