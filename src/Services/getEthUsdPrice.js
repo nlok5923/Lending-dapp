@@ -7,7 +7,7 @@ const getEthToUsdPrice = async () => {
     const priceFeed = new ethers.Contract(addr, aggregatorV3InterfaceABI, provider)
     let roundData = await priceFeed.latestRoundData();
     let decimals = await priceFeed.decimals();
-    let val = Number((roundData.answer.toString() / Math.pow(10, decimals)).toFixed(2));
+    let val = Number((roundData.answer.toString() / Math.pow(10, decimals)).toFixed(0));
     return val;
 }
 

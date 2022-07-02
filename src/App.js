@@ -14,7 +14,7 @@ const App = () => {
   const [currentAddress, setCurrentAddress] = useState('');
   const [etherProvider, setEtherProvider] = useState(null);
   const [contract, setContract] = useState(null);
-  const [contractAddress, setContractAddress] = useState('0x0F6Ad804857A541b25DF4E9EB0D4BaE0d836a3f0');
+  const [contractAddress, setContractAddress] = useState('0x879055f042F748D1A7163dA8BAA2dc0fa801a088');
   const [ethToUsd, setEthToUsd] = useState(0);
   const [token, setTokens] = useState(0);
   const [tokenToWithdraw, setTokenToWithdraw] = useState(0);
@@ -74,8 +74,8 @@ const App = () => {
   const stakeEth = async () => {
     try {
       let _usdCoins = ethAmount * ethToUsd * 100000000;
-      console.log(_usdCoins)
-      await contract.depositEther(_usdCoins, { value: ethers.utils.parseEther(ethAmount) });
+      console.log(_usdCoins.toFixed(0));
+      await contract.depositEther(_usdCoins.toFixed(0), { value: ethers.utils.parseEther(ethAmount) });
       toast.success("Deposit succesfull !!");
     } catch(err) {
       toast.error("Something may be wrong");
@@ -90,7 +90,7 @@ const App = () => {
       let value = ethers.utils.parseEther(ethValue.toString());
       console.log(ethAmount, tokenToWithdraw, ethToUsd, value);
       console.log(value.toString());
-      await contract.withDrawEther(value.toString(), tokenToWithdraw * 100000000, { gasLimit: 1000000 });
+      await contract.withDrawEther(value.toString(), tokenToWithdraw * 100000000);
       toast.success("Withdraw succesfull !!");
     } catch(err) {
       toast.error("Something may be wrong");

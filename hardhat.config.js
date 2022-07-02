@@ -9,8 +9,8 @@ module.exports = {
   networks: {
      hardhat: {},
      goerli: {
-        url: process.env.API_URL,
-        accounts: [`0x${process.env.PRIVATE_KEY}`]
+        url: "https://eth-goerli.alchemyapi.io/v2/V5p1PckEwUqIq5s5rA2zvwRKH0V9Hslr",
+        accounts: ["e3f4cd385c1834aba7227db3b6468cf1805a2831463042781c529a1beacf9f25"]
      }
   },
   etherscan: {

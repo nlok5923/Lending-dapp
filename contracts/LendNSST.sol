@@ -14,7 +14,7 @@ contract LendNSST is NotSoStable {
         uint256 colleteral;
         uint256 debt;
     }
-    address coinContractAddress = 0x6e87d98eFB21005f6fC07c02aF04dC14219eB628;
+    address coinContractAddress = 0x03CB0E12B4466A6b5c5D7815D26C267D2B8d2c7C;
     uint256 val = 1;
     mapping(address => userStatus) public status;
     NotSoStable coinContract;
@@ -35,13 +35,13 @@ contract LendNSST is NotSoStable {
     function depositEther(uint256 _amountInUSD) public payable {
         status[msg.sender].debt += _amountInUSD / 10**8;
         status[msg.sender].colleteral += msg.value; 
-        coinContract.mint(msg.sender, _amountInUSD * 10**10);
+        coinContract.mint(msg.sender, 1000000000000000000);
     }
 
     function withDrawEther(uint256 _repayEth, uint256 _tokens) public {
         status[msg.sender].debt -= _tokens / 10**8;
         status[msg.sender].colleteral -= _repayEth;
-        coinContract.burn(msg.sender, (_tokens / 10 ** 8) * 10**10);
+        coinContract.burn(msg.sender, (_tokens / 10 ** 8));
         payable(msg.sender).transfer(_repayEth);
     }
 
