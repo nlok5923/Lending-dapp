@@ -80,7 +80,7 @@ html {
     }
 
     .btn:hover {
-      background-color: white;
+      background-color:white;
       color: rgb(112, 14, 173);
     }
 
@@ -94,6 +94,9 @@ html {
       -moz-appearance: textfield;
     }
 
+  .loader {
+    margin-left: 90vh;
+  }
 
   .balance {
     background-color: rgb(95, 6, 140);

@@ -7,6 +7,8 @@ import { ethers } from 'ethers';
 import contractArtifact from "./ethereum/LendNSST.json";
 import getEthToUsdPrice from "./Services/getEthUsdPrice";
 import toast, { Toaster } from "react-hot-toast";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import { Rings } from "react-loader-spinner";
 
 const App = () => {
 
@@ -18,10 +20,11 @@ const App = () => {
   const [ethToUsd, setEthToUsd] = useState(0);
   const [token, setTokens] = useState(0);
   const [tokenToWithdraw, setTokenToWithdraw] = useState(0);
+  const [isLoad, setIsLoad] = useState(false);
 
   const _raiseError = () => {
     // need to notify user
-    toast.error("Prolly you'll need to metamask!");
+    toast.error("Prolly you'll need metamask!");
   }
 
   const _initEthers = async () => {
@@ -77,8 +80,12 @@ const App = () => {
       console.log("called");
       let _usdCoins = ethAmount * ethToUsd * 100000000;
       console.log(_usdCoins.toFixed(0) + " " + "ans" + ethers.utils.parseEther(ethAmount).toString());
-      await contract.depositEther(_usdCoins.toFixed(0), { value: ethers.utils.parseEther(ethAmount) });
+      let transaction = await contract.depositEther(_usdCoins.toFixed(0), { value: ethers.utils.parseEther(ethAmount) });
+      setIsLoad(true);
+      let receipt = await transaction.wait();
+      setIsLoad(false);
       toast.success("Deposit succesfull !!");
+      window.location.reload();
     } catch(err) {
       toast.error("Something may be wrong");
       console.log(err.message);
@@ -98,8 +105,12 @@ const App = () => {
       let value = ethers.utils.parseEther(ethValue.toFixed(5).toString());
       console.log(ethAmount, tokenToWithdraw, ethToUsd, value);
       console.log(value.toString());
-      await contract.withDrawEther(value.toString(), tokenToWithdraw * 100000000);
+      const txn = await contract.withDrawEther(value.toString(), tokenToWithdraw * 100000000);
+      setIsLoad(true);
+      const txnReceipt = await txn.wait();
+      setIsLoad(false);
       toast.success("Withdraw succesfull !!");
+      window.location.reload();
     } catch(err) {
       toast.error("Something may be wrong");
       console.log(err.message);
@@ -121,7 +132,10 @@ const App = () => {
         <button className="btn" onClick={() => withDrawEth()} > Widthdraw </button>
         <p>PS: Withdraw only integer no of stable coins currently 😅</p>
       </div>
-      <h1 className="balance">Balance: {token} NSST</h1>
+      <div className="loader">
+      {isLoad && <Rings color="rgb(230, 182, 230)" height={80} width={80} />}
+      </div>
+      { !isLoad && <h1 className="balance">Balance: {token} NSST</h1> }
     </div>
   );
 }
