@@ -33,15 +33,15 @@ contract LendNSST is NotSoStable {
     // we pegged 1NSST coin equals to 1 USD
     // considering collaterization ration = 0.75
     function depositEther(uint256 _amountInUSD) public payable {
-        status[msg.sender].debt += _amountInUSD / 10**8;
+        status[msg.sender].debt += _amountInUSD;
         status[msg.sender].colleteral += msg.value; 
-        coinContract.mint(msg.sender, 1000000000000000000 * (_amountInUSD / 100000000));
+        coinContract.mint(msg.sender, 1000000000000000000 * (_amountInUSD));
     }
 
     function withDrawEther(uint256 _repayEth, uint256 _tokens) public {
-        status[msg.sender].debt -= _tokens / 100000000;
+        status[msg.sender].debt -= _tokens;
         status[msg.sender].colleteral -= _repayEth;
-        coinContract.burn(msg.sender, 1000000000000000000 * (_tokens / 100000000));
+        coinContract.burn(msg.sender, 1000000000000000000 * (_tokens));
         payable(msg.sender).transfer(_repayEth);
     }
 

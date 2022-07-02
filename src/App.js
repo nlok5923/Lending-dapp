@@ -14,7 +14,7 @@ const App = () => {
   const [currentAddress, setCurrentAddress] = useState('');
   const [etherProvider, setEtherProvider] = useState(null);
   const [contract, setContract] = useState(null);
-  const [contractAddress, setContractAddress] = useState('0xF5EB5968289bC92272b11787eeBbFCAad625Ed98');
+  const [contractAddress, setContractAddress] = useState('0x66A88B2EE9a9a0Fe1681DbE23Eca2AA33a846518');
   const [ethToUsd, setEthToUsd] = useState(0);
   const [token, setTokens] = useState(0);
   const [tokenToWithdraw, setTokenToWithdraw] = useState(0);
@@ -55,8 +55,8 @@ const App = () => {
   const _setTokens = async () => {
     if(contract != null) {
       let noOfTokens = await contract.status(currentAddress);
-      console.log("tokens", );
-      setTokens(parseInt(noOfTokens.debt, 16));
+      console.log("tokens", noOfTokens);
+      setTokens(parseInt(noOfTokens.debt) / 100000000);
       let price = await getEthToUsdPrice();
       console.log(price);
       setEthToUsd(price);
@@ -90,7 +90,7 @@ const App = () => {
     try {
       let ethValue = tokenToWithdraw / ethToUsd;
       console.log(ethValue);
-      let value = ethers.utils.parseEther(ethValue.toString());
+      let value = ethers.utils.parseEther(ethValue.toFixed(5).toString());
       console.log(ethAmount, tokenToWithdraw, ethToUsd, value);
       console.log(value.toString());
       await contract.withDrawEther(value.toString(), tokenToWithdraw * 100000000);
@@ -108,12 +108,13 @@ const App = () => {
       <div className="bg bg2"></div>
       <div className="bg bg3"></div>
       <div className="content">
-        <input type="number" name="ethAmount" className="mail" required placeholder="Enter eth" onChange={e => setEthAmount(e.target.value)} /> <br />
+        <input type="number" name="ethAmount" className="mail" required placeholder="Enter eth to deposit" onChange={e => setEthAmount(e.target.value)} /> <br />
         <button className="btn" onClick={() => stakeEth()} > Deposit </button>
       </div>
       <div className="withDraw">
         <input type="number" name="ethAmount" className="mail" required placeholder="Enter tokens" onChange={e => setTokenToWithdraw(e.target.value)} /> <br />
         <button className="btn" onClick={() => withDrawEth()} > Widthdraw </button>
+        <p>PS: Withdraw only integer no of stable coins currently 😅</p>
       </div>
       <h1 className="balance">Balance: {token} NSST</h1>
     </div>
